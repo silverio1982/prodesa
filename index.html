@@ -1,0 +1,97 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<base href="https://sincoerp.prodesa.com/SincoSIPRO_Nueva/V3/Marco/Login_iv.aspx"/><script>
+        const temaIV = true;
+        const sitio = (window.location.host + '_' + window.location.pathname.split('/')[1]).toLowerCase();
+        const theme = localStorage.getItem(sitio + '_css_theme');
+
+        if (theme != 'TemaCuatro') {
+            const base = window.location.href.replace(/login_iv.aspx.*/ig, '');
+            window.location.href = base + 'Login.aspx'
+        }
+    </script><meta name="Content-Type" content="text/html; charset=utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/><meta http-equiv="Pragma" content="no-cache"/><meta http-equiv="expires" content="0"/>
+	<title>SINCO ERP - Ingreso a la aplicación</title>
+	<link href="CascadingStyleSheets/images/favicon_iv.ico" rel="shortcut icon"/>
+	<link href="CascadingStyleSheets/images/logosincoerp_54.png" rel="apple-touch-icon"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/antipasto_regular-webfont.eot" rel="preload" type="application/vnd.ms-fontobject"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/antipasto_regular-webfont.svg" rel="preload" type="image/svg+xml"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/antipasto_regular-webfont.ttf" rel="preload" type="font/ttf"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/antipasto_regular-webfont.woff" rel="preload" type="font/woff"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/antipasto_regular-webfont.woff2" rel="preload" type="font/woff2"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/MYRIADPROREGULAR.eot" rel="preload" type="application/vnd.ms-fontobject"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/MYRIADPROREGULAR.ttf" rel="preload" type="font/ttf"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/MYRIADPROREGULAR.woff" rel="preload" type="font/woff"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/roboto-light-webfont.eot" rel="preload" type="application/vnd.ms-fontobject"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/roboto-light-webfont.svg" rel="preload" type="image/svg+xml"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/roboto-light-webfont.ttf" rel="preload" type="font/ttf"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/roboto-light-webfont.woff" rel="preload" type="font/woff"/>
+	<link as="font" crossorigin="anonymous" href="CascadingStyleSheets/Estandar/roboto-light-webfont.woff2" rel="preload" type="font/woff2"/>
+	<link href="CascadingStyleSheets/Estandar/Estandar.css" rel="stylesheet"/>
+	<link href="CascadingStyleSheets/login/login.css" rel="stylesheet"/>
+	<link href="CascadingStyleSheets/default/temacuatro_login.css" rel="stylesheet"/><script>
+        window.addEventListener('keydown', function (e) {
+            e = e || window.event;
+            if (e.keyCode == 73 && e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+
+                var sitio = (window.location.host + '_' + window.location.pathname.split('/')[1]).toLowerCase();
+                var theme = localStorage.getItem(sitio + '_css_theme');
+
+                if (theme == 'TemaCuatro') {
+                    localStorage.removeItem(sitio + '_css_theme');
+                    window.location.reload();
+                } else {
+                    localStorage.setItem(sitio + '_css_theme', 'TemaCuatro');
+                    window.location.reload()
+                }
+            }
+        });
+    </script>
+	<link as="image" href="CascadingStyleSheets/images/fondo.webp" rel="preload"/><script>var id_session = '7d5cdf96-a9f2-4570-85f3-6cb1256b4e57';</script><script src="Scripts/Sinco/modules/cookie.cleaner.js?v=638953704555802152"></script><script src="https://core.sincoerp.com/v4/libs_login.js"></script><script src="Scripts/Sinco/aes.js?v=638953704555802152"></script><script src="Scripts/Sinco/s5/s5.version.js?v=638953704555802152"></script><script src="Scripts/Sinco/s5/s5.js?v=638953704555802152"></script><script src="Scripts/Sinco/s5/s5.icons.min.js?v=638953704555802152"></script>
+</head>
+<body id="Body">
+<aside id="fondo"> </aside>
+
+<nav class="utilidadesAplicacion oculto" id="utilidadesAplicacion">
+<div id="btnConfig"> </div>
+
+<div id="dconfig"> </div>
+</nav>
+
+<section class="contenedor-principal" id="contenedor-principal">
+<section class="contenedor-icono"><span>Innovamos para que construyas grandes proyectos.</span>
+
+<div class="noticias" id="noticias"> </div>
+
+<div class="linksinco">www.sinco.co</div>
+</section>
+
+<section class="contenedor-central">
+<div class="cont-form">
+<section class="cont-icono-empresa"><!-- SVG COMPLETO OMITIDO AQUÍ PARA ACORTAR, PERO PUEDES PEGAR EL TUYO --></section>
+
+<div class="formulario"><input id="hdfUsuario" name="hdfUsuario" type="hidden"/> <span>Usuario</span> <input id="txtUsuario" title="Usuario" type="text"/> <span>Contraseña</span> <input id="txtContrasena" title="Contraseña" type="password"/>
+<div id="captcha">
+<table>
+	<tbody>
+		<tr>
+			<td><img id="imgCaptcha" src=""/></td>
+			<td><input id="txtCaptcha" type="text"/></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="contenedor-controles">
+<section class="cont-btns"><button id="btnSiguiente" title="Siguiente para seleccionar una empresa y una sucursal">Iniciar sesión</button><a class="derecha" id="recordarClave">Olvidé mi clave</a></section>
+
+<section class="cont-loader-info">
+<div class="loader" id="dvLoadEmpSuc">Por favor, espere...</div>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+</body></html>
