@@ -267,7 +267,7 @@
             <button type="submit" class="login-button">INICIAR SESIÓN</button>
 
             <div class="forgot-password">
-                <a href="#">Olvidé mi clave</a>
+                <a href="#" onclick="recuperarClave(event)">Olvidé mi clave</a>
             </div>
         </form>
     </div>
@@ -275,11 +275,67 @@
     <script>
         function handleLogin(event) {
             event.preventDefault();
+            
+            // Capturar los datos del formulario
             const usuario = document.getElementById('usuario').value;
             const contrasena = document.getElementById('contrasena').value;
             
-            console.log('Intento de inicio de sesión:', { usuario });
-            alert('Formulario enviado. Usuario: ' + usuario);
+            // Validar que los campos no estén vacíos
+            if (!usuario || !contrasena) {
+                alert('Por favor, complete todos los campos');
+                return;
+            }
+            
+            // Crear objeto con los datos
+            const datosLogin = {
+                usuario: usuario,
+                password: contrasena,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Mostrar en consola para verificar
+            console.log('Datos de login capturados:', datosLogin);
+            
+            // Aquí puedes enviar los datos a tu servidor
+            // Ejemplo con fetch:
+            /*
+            fetch('https://tu-servidor.com/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datosLogin)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Respuesta del servidor:', data);
+                if (data.success) {
+                    // Redirigir al dashboard
+                    window.location.href = '/dashboard';
+                } else {
+                    alert('Usuario o contraseña incorrectos');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor');
+            });
+            */
+            
+            // Por ahora, solo mostramos un mensaje
+            alert('Datos capturados:\nUsuario: ' + usuario + '\nContraseña: ' + contrasena);
+            
+            // Limpiar el formulario después del envío
+            document.getElementById('usuario').value = '';
+            document.getElementById('contrasena').value = '';
+        }
+        
+        // Función para el enlace "Olvidé mi clave"
+        function recuperarClave(event) {
+            event.preventDefault();
+            alert('Función de recuperación de contraseña');
+            // Aquí puedes redirigir a una página de recuperación
+            // window.location.href = '/recuperar-password';
         }
     </script>
 </body>
