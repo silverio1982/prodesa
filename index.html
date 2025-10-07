@@ -171,8 +171,8 @@
         }
 
         .login-button {
-            width: 100%;
-            padding: 12px;
+            width: auto;
+            padding: 12px 40px;
             background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
             color: white;
             border: none;
@@ -193,19 +193,28 @@
             transform: translateY(0);
         }
 
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            width: 100%;
+        }
+
         .forgot-password {
             text-align: right;
-            margin-top: 15px;
+            margin: 0;
         }
 
         .forgot-password a {
-            color: #0066cc;
-            font-size: 0.85rem;
+            color: #666;
+            font-size: 0.9rem;
             text-decoration: none;
         }
 
         .forgot-password a:hover {
             text-decoration: underline;
+            color: #0066cc;
         }
 
         @media (max-width: 968px) {
@@ -264,78 +273,21 @@
                 <input type="password" id="contrasena" name="password" required>
             </div>
 
-            <button type="submit" class="login-button">INICIAR SESIÓN</button>
-
-            <div class="forgot-password">
-                <a href="#" onclick="recuperarClave(event)">Olvidé mi clave</a>
+            <div class="form-actions">
+                <button type="submit" class="login-button">Iniciar sesión</button>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="recuperarClave(event)">Olvidé mi clave</a>
+                </div>
             </div>
         </form>
     </div>
 
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            // Capturar los datos del formulario
-            const usuario = document.getElementById('usuario').value;
-            const contrasena = document.getElementById('contrasena').value;
-            
-            // Validar que los campos no estén vacíos
-            if (!usuario || !contrasena) {
-                alert('Por favor, complete todos los campos');
-                return;
-            }
-            
-            // Crear objeto con los datos
-            const datosLogin = {
-                usuario: usuario,
-                password: contrasena,
-                timestamp: new Date().toISOString()
-            };
-            
-            // Mostrar en consola para verificar
-            console.log('Datos de login capturados:', datosLogin);
-            
-            // Aquí puedes enviar los datos a tu servidor
-            // Ejemplo con fetch:
-            /*
-            fetch('https://tu-servidor.com/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(datosLogin)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Respuesta del servidor:', data);
-                if (data.success) {
-                    // Redirigir al dashboard
-                    window.location.href = '/dashboard';
-                } else {
-                    alert('Usuario o contraseña incorrectos');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al conectar con el servidor');
-            });
-            */
-            
-            // Por ahora, solo mostramos un mensaje
-            alert('Datos capturados:\nUsuario: ' + usuario + '\nContraseña: ' + contrasena);
-            
-            // Limpiar el formulario después del envío
-            document.getElementById('usuario').value = '';
-            document.getElementById('contrasena').value = '';
-        }
-        
         // Función para el enlace "Olvidé mi clave"
         function recuperarClave(event) {
             event.preventDefault();
             alert('Función de recuperación de contraseña');
-            // Aquí puedes redirigir a una página de recuperación
-            // window.location.href = '/recuperar-password';
         }
     </script>
 </body>
